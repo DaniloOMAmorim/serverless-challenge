@@ -4,7 +4,6 @@ import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Repository } from 'typeorm';
 import { Employee } from './entities/employee.entity';
-import { error } from 'console';
 
 @Injectable()
 export class EmployeeService {
@@ -43,6 +42,6 @@ export class EmployeeService {
       throw new NotFoundException(error.message);
     })
 
-    await this.employeeRepository.softDelete(id);
+    await this.employeeRepository.delete(id);
   }
 }

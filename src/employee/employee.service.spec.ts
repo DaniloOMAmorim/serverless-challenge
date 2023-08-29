@@ -30,7 +30,7 @@ describe('EmployeeService', () => {
             find: jest.fn().mockResolvedValue(employeeEntityList),
             findOneByOrFail: jest.fn().mockResolvedValue(employeeEntityList[0]),
             merge: jest.fn().mockResolvedValue(updatedEmployeeEntity),
-            softDelete: jest.fn().mockResolvedValue(undefined),
+            delete: jest.fn().mockResolvedValue(undefined),
           }
         }               
       ],
@@ -134,7 +134,7 @@ describe('EmployeeService', () => {
 
       expect(res).toBeUndefined();
       expect(repository.findOneByOrFail).toHaveBeenCalledTimes(1);
-      expect(repository.softDelete).toHaveBeenCalledTimes(1);
+      expect(repository.delete).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a not found exception', () => {
@@ -144,7 +144,7 @@ describe('EmployeeService', () => {
     });
 
     it('should throw an exception', () => {
-      jest.spyOn(repository, 'softDelete').mockRejectedValueOnce(new Error());
+      jest.spyOn(repository, 'delete').mockRejectedValueOnce(new Error());
 
       expect(service.remove('id')).rejects.toThrowError();
     });
